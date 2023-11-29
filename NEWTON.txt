@@ -1,0 +1,22 @@
+clc
+clear all
+x=[-1;0;1;4];
+f=[6;5;4;61]; 
+n=4;
+p=2;
+M= zeros(n,n);
+prod =1;
+for i=1:n
+    M(i,1) = f(i);
+end
+sum = M(1,1);
+for j=2:n
+    for i = j:n
+        M(i,j)=(M(i,j-1)-M(i-1,j-1))/(x(i)-x(i-(j-1)));
+    end
+    prod = prod * (p-X(j-1));
+    sum = sum+prod * M(j,j);
+end
+M 
+sum
+prod

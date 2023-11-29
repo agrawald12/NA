@@ -1,0 +1,25 @@
+clc
+clear all
+a=[5 0 1 -2 ; -1 4 -1 1 ; 2 3 -6 0; 1 2 4 10];
+b=[11; -9;-13;-13];
+n=length(a);
+% making upper triangular matrix
+for i=1:n-1
+    for j=i+1:n
+        l(j,i)=a(j,i)/a(i,i);
+        a(j,:)=a(j,:)- l(j,i)*a(i,:); 
+        b(j) = b(j) - l(j,i)*b(i);
+        
+    end
+end
+% backward subsititution for last one;
+x(n)=b(n)/a(n,n);
+for i = n-1:-1:1
+    sum=0;
+    for j= i+1:n
+        sum = sum + a(i,j)*x(j); 
+    end
+    x(i)=(b(i) - sum)/a(i,i);
+
+end
+x

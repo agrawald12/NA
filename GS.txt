@@ -1,0 +1,27 @@
+clc
+clear all
+a=[5 0 1 -2 ; -1 4 -1 1 ; 2 3 -6 0; 1 2 4 10];
+b=[11; -9;-13;-13];
+tol=0.000001;
+x=[1;1;1;1];
+n= length(a);
+while 1
+    x_prev =x;
+    for i=1:n 
+        sum=0;
+        for j =1:n
+            if i~=j
+                sum = sum+ (a(i,j)*x(j));
+            end
+               
+        end
+       x(i) = (b(i) - sum )/ a(i,i);
+           
+    end
+      err = max(abs(x_prev-x));
+        if (err<tol)
+            break;
+        end
+
+end
+x

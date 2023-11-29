@@ -1,0 +1,36 @@
+clc 
+clear all
+a=[5,0,1,-2 ; -1,4,-1,1 ; 2,3,-6,0 ; 1,2,4,10];
+b=[11 ; -9 ; -13 ; -13];
+n = 4 ; 
+
+l=eye(n);
+for i=1:n-1
+    for j=i+1:n
+        l(j,i) = a(j,i) / a(i,i);
+        a(j,: )= a(j,: ) - l(j,i)* a(i,:);
+    end
+
+end
+
+
+y(1)=b(1);
+
+for i=2:n
+    sum=0;
+    for j=1:i-1
+        sum = sum+ (l(i,j)*y(j));
+    end
+    y(i) = b(i)-sum;
+
+end
+
+x(n) = b(n)/a(n,n);
+for i=n-1:-1:1
+    sum2=0;
+    for j=i+1:n
+        sum2 = sum2 + a(i,j)*x(j); 
+    end
+    x(i) = (y(i)-sum)/a(i,i);
+end
+x
